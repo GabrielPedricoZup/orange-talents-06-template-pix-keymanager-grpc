@@ -1,4 +1,6 @@
 import com.google.protobuf.gradle.*
+
+
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.4.32"
     id("org.jetbrains.kotlin.kapt") version "1.4.32"
@@ -11,7 +13,7 @@ plugins {
 version = "0.1"
 group = "com.zupedu.gabrielpedrico"
 
-val kotlinVersion=project.properties.get("kotlinVersion")
+val kotlinVersion = project.properties.get("kotlinVersion")
 repositories {
     mavenCentral()
 }
@@ -37,6 +39,19 @@ dependencies {
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 
     testImplementation("io.micronaut:micronaut-http-client")
+    // https://mvnrepository.com/artifact/io.micronaut/micronaut-http-client
+    implementation("io.micronaut:micronaut-http-client:3.0.0-M5")
+    // https://mvnrepository.com/artifact/io.micronaut.configuration/micronaut-hibernate-validator
+    implementation("io.micronaut.configuration:micronaut-hibernate-validator:2.0.0")
+    // https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator
+    implementation("org.hibernate.validator:hibernate-validator:7.0.1.Final")
+    implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
+// https://mvnrepository.com/artifact/io.micronaut.grpc/micronaut-grpc-annotation
+    implementation("io.micronaut.grpc:micronaut-grpc-annotation:3.0.0.RC1")
+
+    // https://mvnrepository.com/artifact/io.grpc/grpc-protobuf
+    implementation("io.grpc:grpc-protobuf:1.39.0")
+
 
 }
 

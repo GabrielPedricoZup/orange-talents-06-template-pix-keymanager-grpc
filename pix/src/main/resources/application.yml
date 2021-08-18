@@ -1,3 +1,28 @@
 micronaut:
   application:
     name: pix
+
+grpc:
+  server:
+    port: ${SERVER_PORT:50051}
+    keep-alive-time: 1h
+    max-inbound-message-size: 1024
+
+datasources:
+  default:
+    default:
+      url: ${DB_URL:`jdbc:postgresql://localhost:5432/postgres`}
+      driverClassName: org.postgresql.Driver
+      username: ${DB_USERNAME:postgres}
+      password: ${DB_PASSWORD:1234}
+
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+
+clients:
+  itau: http://localhost:9091/api/v1
+  bcb: http://localhost:8082/api/v1/pix/keys
