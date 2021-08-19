@@ -1,6 +1,6 @@
 package com.zupedu.gabrielpedrico.handlers
-import jakarta.inject.Inject
-import jakarta.inject.Singleton
+import javax.inject.Inject
+import javax.inject.Singleton
 
 @Singleton
 class ExceptionHandlerResolver(

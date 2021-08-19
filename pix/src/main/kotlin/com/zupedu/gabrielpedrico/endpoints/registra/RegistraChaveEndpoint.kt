@@ -4,8 +4,8 @@ import com.zupedu.gabrielpedrico.RegistraChavePixRequest
 import com.zupedu.gabrielpedrico.RegistraChavePixResponse
 import com.zupedu.gabrielpedrico.RegistraPixGrpcServiceGrpc
 import io.grpc.stub.StreamObserver
-import jakarta.inject.Inject
-import jakarta.inject.Singleton
+import javax.inject.Inject
+import javax.inject.Singleton
 
 @Singleton
 class RegistraChaveEndpoint(@Inject private val service: NovaChavePixService) :

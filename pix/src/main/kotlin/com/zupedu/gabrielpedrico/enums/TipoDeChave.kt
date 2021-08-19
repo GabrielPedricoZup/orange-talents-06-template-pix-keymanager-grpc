@@ -1,9 +1,11 @@
 package com.zupedu.gabrielpedrico.enums
 
-import io.micronaut.validation.validator.constraints.EmailValidator
+
+import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator
 
-    enum class TipoDeChave {
+
+enum class TipoDeChave {
 
     CPF{
         override fun valida(chave: String?): Boolean{

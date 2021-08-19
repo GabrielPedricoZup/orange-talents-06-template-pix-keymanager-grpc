@@ -1,6 +1,6 @@
 package com.zupedu.gabrielpedrico.dtos
 
-import com.zupedu.gabrielpedrico.TipoDeChave
+
 import com.zupedu.gabrielpedrico.TipoDeConta
 import com.zupedu.gabrielpedrico.models.ChavePix
 import com.zupedu.gabrielpedrico.validations.ValidPixKey
@@ -8,6 +8,7 @@ import com.zupedu.gabrielpedrico.validations.ValidUUID
 import io.micronaut.core.annotation.Introspected
 import java.util.*
 import javax.validation.constraints.NotBlank
+import com.zupedu.gabrielpedrico.enums.*
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 
@@ -15,15 +16,15 @@ import javax.validation.constraints.Size
 @Introspected
 data class NovaChavePix(
 
-    @ValidUUID
+    @field:ValidUUID
     @field:NotBlank
-    val clienteId: String?,
+    val clienteId: String,
     @field:NotNull
     val tipo: TipoDeChave?,
     @field:Size(max = 77)
-    val chave: String?,
+    val chave: String,
     @field:NotNull
-    val tipoDeConta: TipoDeConta?
+    val tipoDeConta: TipoDeConta
 ) {
 
         fun paraChavePix(conta: ContaAssociada): ChavePix {

@@ -1,13 +1,12 @@
 package com.zupedu.gabrielpedrico.models
 
-import com.zupedu.gabrielpedrico.TipoDeChave
 import com.zupedu.gabrielpedrico.TipoDeConta
 import com.zupedu.gabrielpedrico.dtos.ContaAssociada
+import com.zupedu.gabrielpedrico.enums.TipoDeChave
 import org.hibernate.annotations.GenericGenerator
 import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.*
-import javax.validation.Valid
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 
@@ -35,8 +34,7 @@ data class ChavePix(
     @Column(nullable = false)
     var tipoDeConta: TipoDeConta,
 
-    @field:Valid
-    @Embedded
+
     val conta: ContaAssociada
 ) {
 

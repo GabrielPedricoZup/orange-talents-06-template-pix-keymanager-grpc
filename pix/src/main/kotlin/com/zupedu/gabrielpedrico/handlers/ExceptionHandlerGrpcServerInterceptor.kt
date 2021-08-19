@@ -5,9 +5,9 @@ import io.grpc.Metadata
 import io.grpc.ServerCall
 import io.grpc.ServerCallHandler
 import io.grpc.ServerInterceptor
-import jakarta.inject.Inject
-import jakarta.inject.Singleton
 import org.slf4j.LoggerFactory
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * TIP1: This interceptor has been tested with gRPC-Java, maybe it doesn't work with gRPC-Kotlin
