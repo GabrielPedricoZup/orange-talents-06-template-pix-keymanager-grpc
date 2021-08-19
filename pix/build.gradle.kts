@@ -51,6 +51,13 @@ dependencies {
     implementation("org.hibernate:hibernate-validator:6.1.6.Final")
 
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+    //TEST
+    testImplementation("io.micronaut.xml:micronaut-jackson-xml")
+    runtimeOnly("com.h2database:h2")
+    testImplementation("org.mockito:mockito-core:3.+")
+    testImplementation("io.micronaut:micronaut-http-client")
+    testAnnotationProcessor("io.micronaut:micronaut-inject-java")
 }
 
 application {
