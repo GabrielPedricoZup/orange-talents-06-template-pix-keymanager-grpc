@@ -39,68 +39,74 @@ internal class RegistraChaveEndpointTest(
     @Inject
     lateinit var itauClient: ContasDeClientesNoItauClient
 
-    companion object{
+    companion object {
         val CLIENTE_ID = UUID.randomUUID()
     }
 
     @BeforeEach
-    fun setup(){
+    fun setup() {
         repository.deleteAll()
     }
 
     @Test
-    fun `deve registrar nova chave pix`(){
+    fun `deve registrar nova chave pix`() {
         //cenario
-        `when`(itauClient.buscaContaPorTipo(clienteId = CLIENTE_ID.toString(),tipo = "CONTA_CORRENTE"))
+        `when`(itauClient.buscaContaPorTipo(clienteId = CLIENTE_ID.toString(), tipo = "CONTA_CORRENTE"))
             .thenReturn(HttpResponse.ok(dadosDaContaResponse()))
         //ação
-        val response = grpcClient.registra(RegistraChavePixRequest.newBuilder()
-                                            .setClientId(CLIENTE_ID.toString())
-                                            .setTipoDeChave(TipoDeChave.EMAIL)
-                                            .setChave("gabriel.pedrico@zup.com.br")
-                                            .setTipoDeConta(TipoDeConta.CONTA_CORRENTE)
-                                            .build())
+        val response = grpcClient.registra(
+            RegistraChavePixRequest.newBuilder()
+                .setClientId(CLIENTE_ID.toString())
+                .setTipoDeChave(TipoDeChave.EMAIL)
+                .setChave("gabriel.pedrico@zup.com.br")
+                .setTipoDeConta(TipoDeConta.CONTA_CORRENTE)
+                .build()
+        )
         //validação
-        with(response){
-            assertEquals(CLIENTE_ID.toString(),clientId)
+        with(response) {
+            assertEquals(CLIENTE_ID.toString(), clientId)
             assertNotNull(pixId)
         }
 
     }
 
     @Test
-    fun `nao deve registrar chave pix existente`(){
+    fun `nao deve registrar chave pix existente`() {
         //cenário
-        repository.save(ChavePix(
-            tipo = com.zupedu.gabrielpedrico.enums.TipoDeChave.CPF,
-            chave = "41531952860",
-            clienteId = CLIENTE_ID,
-            tipoDeConta = TipoDeConta.CONTA_CORRENTE,
-            conta = dadosDaContaResponse().paraContaAssociada()
+        repository.save(
+            ChavePix(
+                tipo = com.zupedu.gabrielpedrico.enums.TipoDeChave.CPF,
+                chave = "41531952860",
+                clienteId = CLIENTE_ID,
+                tipoDeConta = TipoDeConta.CONTA_CORRENTE,
+                conta = dadosDaContaResponse().paraContaAssociada()
 
-        ))
+            )
+        )
 
         //ação
         val thrown = assertThrows<StatusRuntimeException> {
-            grpcClient.registra(RegistraChavePixRequest.newBuilder()
-                .setClientId(CLIENTE_ID.toString())
-                .setTipoDeChave(TipoDeChave.CPF)
-                .setChave("41531952860")
-                .setTipoDeConta(TipoDeConta.CONTA_CORRENTE)
-                .build())
+            grpcClient.registra(
+                RegistraChavePixRequest.newBuilder()
+                    .setClientId(CLIENTE_ID.toString())
+                    .setTipoDeChave(TipoDeChave.CPF)
+                    .setChave("41531952860")
+                    .setTipoDeConta(TipoDeConta.CONTA_CORRENTE)
+                    .build()
+            )
         }
 
         //validação
-        with(thrown){
-            assertEquals(Status.ALREADY_EXISTS.code,status.code)
-            assertEquals("Chave Pix '41531952860' existente",status.description)
+        with(thrown) {
+            assertEquals(Status.ALREADY_EXISTS.code, status.code)
+            assertEquals("Chave Pix '41531952860' existente", status.description)
         }
     }
 
     @Test
-    fun `nao deve registrar chave pix quando nao encontrar dados da conta cliente`(){
+    fun `nao deve registrar chave pix quando nao encontrar dados da conta cliente`() {
         //cenário
-        `when`(itauClient.buscaContaPorTipo(clienteId = CLIENTE_ID.toString(),tipo = "CONTA_CORRENTE"))
+        `when`(itauClient.buscaContaPorTipo(clienteId = CLIENTE_ID.toString(), tipo = "CONTA_CORRENTE"))
             .thenReturn(HttpResponse.notFound())
 
         //ação
@@ -115,44 +121,44 @@ internal class RegistraChaveEndpointTest(
             )
         }
         //validação
-        with(thrown){
-            assertEquals(Status.FAILED_PRECONDITION.code,status.code)
-            assertEquals("Cliente não encontrado no Itau",status.description)
+        with(thrown) {
+            assertEquals(Status.FAILED_PRECONDITION.code, status.code)
+            assertEquals("Cliente não encontrado no Itau", status.description)
         }
     }
 
-    fun `nao deve registrar chave pix quando parametros forem invalidos`(){
+    fun `nao deve registrar chave pix quando parametros forem invalidos`() {
         //ação
         val thrown = assertThrows<StatusRuntimeException> {
             grpcClient.registra(RegistraChavePixRequest.newBuilder().build())
         }
         //validação
-        with(thrown){
-            assertEquals(Status.INVALID_ARGUMENT.code,status.code)
-            assertEquals("Dados inválidos",status.description)
+        with(thrown) {
+            assertEquals(Status.INVALID_ARGUMENT.code, status.code)
+            assertEquals("Dados inválidos", status.description)
         }
     }
 
     @MockBean(ContasDeClientesNoItauClient::class)
-    fun itauClient(): ContasDeClientesNoItauClient?{
+    fun itauClient(): ContasDeClientesNoItauClient? {
         return Mockito.mock(ContasDeClientesNoItauClient::class.java)
     }
 
     @Factory
-    class Clients{
+    class Clients {
         @Bean
-        fun blockingStub(@GrpcChannel(GrpcServerChannel.NAME) channel: ManagedChannel): RegistraPixGrpcServiceGrpc.RegistraPixGrpcServiceBlockingStub{
+        fun blockingStub(@GrpcChannel(GrpcServerChannel.NAME) channel: ManagedChannel): RegistraPixGrpcServiceGrpc.RegistraPixGrpcServiceBlockingStub {
             return RegistraPixGrpcServiceGrpc.newBlockingStub(channel)
         }
     }
 
-    private fun dadosDaContaResponse(): DadosDaContaResponse{
+    private fun dadosDaContaResponse(): DadosDaContaResponse {
         return DadosDaContaResponse(
             tipo = "CONTA_CORRENTE",
-            instituicao = InstituicaoResponse("UNIBANCO ITAU SA","ITAU_UNIBANCO_ISBP"),
+            instituicao = InstituicaoResponse("UNIBANCO ITAU SA", "ITAU_UNIBANCO_ISBP"),
             agencia = "1218",
             numero = "291900",
-            titular = TitularResponse("973d90e9-ba09-418d-aa1e-785cf2f41350","RAFAEL M C PONTE","41531952860")
+            titular = TitularResponse("973d90e9-ba09-418d-aa1e-785cf2f41350", "RAFAEL M C PONTE", "41531952860")
         )
     }
 }

@@ -11,6 +11,10 @@ service RegistraPixGrpcService {
   rpc registra (RegistraChavePixRequest) returns (RegistraChavePixResponse) {}
 }
 
+service DeletaPixGrpcService {
+  rpc deleta (DeletaChavePixRequest) returns (DeletaChavePixResponse) {}
+}
+
 message PixRequest {
   string name = 1;
 }
@@ -45,6 +49,18 @@ message RegistraChavePixRequest {
 }
 
 message RegistraChavePixResponse{
+  string clientId = 1;
+  string pixId = 2;
+}
+
+/*Deleta chave pix*/
+
+message DeletaChavePixRequest {
+  string clientId = 1;
+  string pixId = 2;
+}
+
+message DeletaChavePixResponse{
   string clientId = 1;
   string pixId = 2;
 }
