@@ -12,7 +12,7 @@ fun DeletaChavePixRequest.paraDeletaChavePix (validador: Validator) : DeletaChav
         chavePix = pixId)
 
     val erros = validador.validate(deletaChavePix)
-    if (erros.isNotEmpty()) { // ha erros
+    if (erros.isNotEmpty()) {
         throw ConstraintViolationException(erros)
     }
 

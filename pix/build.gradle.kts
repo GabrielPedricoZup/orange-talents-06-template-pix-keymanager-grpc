@@ -8,7 +8,7 @@ plugins {
     id("io.micronaut.application") version "1.5.4"
     id("org.jetbrains.kotlin.plugin.allopen") version "1.4.32"
     id("com.google.protobuf") version "0.8.15"
-    id("org.jetbrains.kotlin.plugin.noarg") version "1.5.21"
+    id("org.jetbrains.kotlin.plugin.jpa") version "1.4.32"
 }
 noArg {
     invokeInitializers = true

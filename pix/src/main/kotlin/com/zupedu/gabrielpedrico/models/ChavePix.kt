@@ -18,24 +18,24 @@ import javax.validation.constraints.NotNull
 data class ChavePix(
     @field:NotNull
     @Column(nullable = false)
-    var clienteId: UUID? = null,
+    var clienteId: UUID?,
 
     @field:NotNull
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    var tipo: TipoDeChave? = null,
+    var tipo: TipoDeChave?,
 
     @field:NotBlank
     @Column(unique = true,nullable = false)
-    var chave: String? = null,
+    var chave: String?,
 
-    @field:NotNull
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    var tipoDeConta: TipoDeConta? = null,
+    var tipoDeConta: TipoDeConta?,
 
 
-    var conta: ContaAssociada? = null
+    var conta: ContaAssociada?
 ) {
 
     @Id

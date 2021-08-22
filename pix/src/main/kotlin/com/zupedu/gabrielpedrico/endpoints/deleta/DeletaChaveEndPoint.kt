@@ -3,11 +3,11 @@ package com.zupedu.gabrielpedrico.endpoints.deleta
 import com.zupedu.gabrielpedrico.DeletaChavePixRequest
 import com.zupedu.gabrielpedrico.DeletaChavePixResponse
 import com.zupedu.gabrielpedrico.DeletaPixGrpcServiceGrpc
-import com.zupedu.gabrielpedrico.handlers.ChavePixExistenteException
+import com.zupedu.gabrielpedrico.handlers.ChavePixNaoExistenteException
+import com.zupedu.gabrielpedrico.handlers.ChavePixNaoPertenceUsuarioException
 import com.zupedu.gabrielpedrico.integrations.ContasDeClientesNoItauClient
 import com.zupedu.gabrielpedrico.repositories.ChavePixRepository
 import io.grpc.stub.StreamObserver
-import io.micronaut.validation.Validated
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -25,7 +25,8 @@ class DeletaChaveEndPoint(
                         responseObserver: StreamObserver<DeletaChavePixResponse>?) {
 
         val deletaChave = request?.paraDeletaChavePix(validator)
-        if(repository.findById(UUID.fromString(request?.pixId.toString())).isEmpty) throw IllegalStateException("Chave pix não existente")
+        if(repository.findById(UUID.fromString(request?.pixId.toString())).isEmpty) throw ChavePixNaoExistenteException("Chave pix não existente")
+        if(!repository.existsByIdAndClienteId(UUID.fromString(request?.pixId.toString()),UUID.fromString(request?.clientId.toString()))) throw ChavePixNaoPertenceUsuarioException("Chave pix não pertence ao cliente informado")
         val response = itauClient.buscaConta(deletaChave?.clienteId.toString())
         val conta = response.body() ?: throw IllegalStateException("Cliente não encontrado no Itau")
 

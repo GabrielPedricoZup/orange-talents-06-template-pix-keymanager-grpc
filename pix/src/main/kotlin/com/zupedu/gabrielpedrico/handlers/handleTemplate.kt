@@ -25,3 +25,15 @@ fun alreadyExistsHandler(message: String?): com.google.rpc.Status =
         .setCode(Code.ALREADY_EXISTS.number)
         .setMessage(message)
         .build()
+
+fun acessDenied(message: String?): com.google.rpc.Status =
+    com.google.rpc.Status.newBuilder()
+        .setCode(Code.PERMISSION_DENIED.number)
+        .setMessage(message)
+        .build()
+
+fun notFound(message: String?): com.google.rpc.Status =
+    com.google.rpc.Status.newBuilder()
+        .setCode(Code.NOT_FOUND.number)
+        .setMessage(message)
+        .build()

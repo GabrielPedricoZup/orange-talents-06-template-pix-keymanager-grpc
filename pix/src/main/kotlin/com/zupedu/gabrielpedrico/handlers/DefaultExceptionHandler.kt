@@ -13,6 +13,8 @@ class DefaultExceptionHandler : ExceptionHandler<Exception> {
             is IllegalArgumentException -> invalidArgumentHandler(e.message)
             is IllegalStateException -> failedPreconditionHandler(e.message)
             is  ChavePixExistenteException -> alreadyExistsHandler(e.message)
+            is ChavePixNaoPertenceUsuarioException -> acessDenied(e.message)
+            is ChavePixNaoExistenteException -> notFound(e.message)
             else -> defaultHandler(e.message)
         }
         return StatusWithDetails(status)
