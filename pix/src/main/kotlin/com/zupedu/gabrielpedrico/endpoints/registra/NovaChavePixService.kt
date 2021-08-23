@@ -1,7 +1,12 @@
 package com.zupedu.gabrielpedrico.endpoints.registra
 
+import com.zupedu.gabrielpedrico.TipoDeConta
+import com.zupedu.gabrielpedrico.dtos.BankAccount
+import com.zupedu.gabrielpedrico.dtos.BcbChavePixRequest
 import com.zupedu.gabrielpedrico.dtos.NovaChavePix
+import com.zupedu.gabrielpedrico.dtos.Owner
 import com.zupedu.gabrielpedrico.handlers.ChavePixExistenteException
+import com.zupedu.gabrielpedrico.integrations.BcbClient
 import com.zupedu.gabrielpedrico.integrations.ContasDeClientesNoItauClient
 import com.zupedu.gabrielpedrico.models.ChavePix
 import com.zupedu.gabrielpedrico.repositories.ChavePixRepository
@@ -15,7 +20,8 @@ import javax.validation.Valid
 @Validated
 @Singleton
 class NovaChavePixService(@Inject val repository: ChavePixRepository,
-                          @Inject val itauClient: ContasDeClientesNoItauClient
+                          @Inject val itauClient: ContasDeClientesNoItauClient,
+                          @Inject val bcbClient: BcbClient
 ) {
 
     private val LOGGER = LoggerFactory.getLogger(this::class.java)
@@ -28,7 +34,15 @@ class NovaChavePixService(@Inject val repository: ChavePixRepository,
         //2. busca dados da conta no ERP do ITAU
         val response = itauClient.buscaContaPorTipo(novaChave.clienteId, novaChave.tipoDeConta.name)
         val conta = response.body()?.paraContaAssociada() ?: throw IllegalStateException("Cliente não encontrado no Itau")
-        //3. grava no banco de dados
+        //3. grava dados da conta no ERP do BCB
+        var tipoDeChave: String? = null
+        if(novaChave.tipoDeConta.name == "CONTA_CORRENTE")  tipoDeChave = "CACC"
+        if(novaChave.tipoDeConta.name == "CONTA_POUPANCA")  tipoDeChave = "SVGS"
+        var bankAccount = BankAccount("60701190",conta.agencia.toString(),conta.numeroDaConta.toString(),tipoDeChave.toString())
+        var owner: Owner = Owner("NATURAL_PERSON",conta.nomeDoTitular.toString(),conta.cpfDoTitular.toString())
+        val request: BcbChavePixRequest = BcbChavePixRequest(novaChave.tipo,novaChave.chave,bankAccount,owner)
+        var debug = bcbClient.registraConta(request)
+        //4. grava no banco de dados
         val chave = novaChave.paraChavePix(conta)
         repository.save(chave)
 
