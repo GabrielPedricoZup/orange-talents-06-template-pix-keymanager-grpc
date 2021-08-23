@@ -15,6 +15,7 @@ class DefaultExceptionHandler : ExceptionHandler<Exception> {
             is  ChavePixExistenteException -> alreadyExistsHandler(e.message)
             is ChavePixNaoPertenceUsuarioException -> acessDenied(e.message)
             is ChavePixNaoExistenteException -> notFound(e.message)
+            is BcbErroException -> bcbInternError(e.message)
             else -> defaultHandler(e.message)
         }
         return StatusWithDetails(status)

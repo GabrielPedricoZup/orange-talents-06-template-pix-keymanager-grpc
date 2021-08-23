@@ -4,10 +4,10 @@ import com.zupedu.gabrielpedrico.RegistraChavePixRequest
 import com.zupedu.gabrielpedrico.RegistraPixGrpcServiceGrpc
 import com.zupedu.gabrielpedrico.TipoDeChave
 import com.zupedu.gabrielpedrico.TipoDeConta
-import com.zupedu.gabrielpedrico.integrations.ContasDeClientesNoItauClient
-import com.zupedu.gabrielpedrico.integrations.DadosDaContaResponse
-import com.zupedu.gabrielpedrico.integrations.InstituicaoResponse
-import com.zupedu.gabrielpedrico.integrations.TitularResponse
+import com.zupedu.gabrielpedrico.dtos.BankAccount
+import com.zupedu.gabrielpedrico.dtos.BcbChavePixRequest
+import com.zupedu.gabrielpedrico.dtos.Owner
+import com.zupedu.gabrielpedrico.integrations.*
 import com.zupedu.gabrielpedrico.models.ChavePix
 import com.zupedu.gabrielpedrico.repositories.ChavePixRepository
 import io.grpc.ManagedChannel
@@ -51,17 +51,37 @@ internal class RegistraChaveEndpointTest(
     @Test
     fun `deve registrar nova chave pix`() {
         //cenario
-        `when`(itauClient.buscaContaPorTipo(clienteId = CLIENTE_ID.toString(), tipo = "CONTA_CORRENTE"))
+        Mockito.`when`(itauClient.buscaContaPorTipo(clienteId = CLIENTE_ID.toString(), tipo = "CONTA_CORRENTE"))
             .thenReturn(HttpResponse.ok(dadosDaContaResponse()))
-        //ação
-        val response = grpcClient.registra(
-            RegistraChavePixRequest.newBuilder()
-                .setClientId(CLIENTE_ID.toString())
-                .setTipoDeChave(TipoDeChave.EMAIL)
-                .setChave("gabriel.pedrico@zup.com.br")
-                .setTipoDeConta(TipoDeConta.CONTA_CORRENTE)
-                .build()
-        )
+
+        Mockito.`when`(
+            bcbClient().registraConta(
+                BcbChavePixRequest(
+                    com.zupedu.gabrielpedrico.enums.TipoDeChave.EMAIL,
+                    "gabriel.pedrico@zup.com.br",
+                    BankAccount(
+                        "60701190",
+                        "1218",
+                        "291900",
+                        "CACC"
+                    ),
+                    Owner(
+                        "NATURAL_PERSON",
+                        "RAFAEL M C PONTE",
+                        "02467781054"
+                    )
+                )
+            )).thenReturn(HttpResponse.ok())
+
+            //ação
+            val response = grpcClient . registra (
+                RegistraChavePixRequest.newBuilder()
+                    .setClientId(CLIENTE_ID.toString())
+                    .setTipoDeChave(TipoDeChave.EMAIL)
+                    .setChave("gabriel.pedrico@zup.com.br")
+                    .setTipoDeConta(TipoDeConta.CONTA_CORRENTE)
+                    .build()
+                )
         //validação
         with(response) {
             assertEquals(CLIENTE_ID.toString(), clientId)
@@ -142,6 +162,11 @@ internal class RegistraChaveEndpointTest(
     @MockBean(ContasDeClientesNoItauClient::class)
     fun itauClient(): ContasDeClientesNoItauClient? {
         return Mockito.mock(ContasDeClientesNoItauClient::class.java)
+    }
+
+    @MockBean(BcbClient::class)
+    fun bcbClient(): BcbClient {
+        return Mockito.mock(BcbClient::class.java)
     }
 
     @Factory

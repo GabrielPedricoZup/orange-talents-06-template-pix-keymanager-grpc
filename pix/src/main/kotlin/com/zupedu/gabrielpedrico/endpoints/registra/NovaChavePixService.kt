@@ -41,7 +41,7 @@ class NovaChavePixService(@Inject val repository: ChavePixRepository,
         var bankAccount = BankAccount("60701190",conta.agencia.toString(),conta.numeroDaConta.toString(),tipoDeChave.toString())
         var owner: Owner = Owner("NATURAL_PERSON",conta.nomeDoTitular.toString(),conta.cpfDoTitular.toString())
         val request: BcbChavePixRequest = BcbChavePixRequest(novaChave.tipo,novaChave.chave,bankAccount,owner)
-        var debug = bcbClient.registraConta(request)
+        bcbClient.registraConta(request)
         //4. grava no banco de dados
         val chave = novaChave.paraChavePix(conta)
         repository.save(chave)

@@ -3,6 +3,7 @@ package com.zupedu.gabrielpedrico.endpoints.deleta
 import com.zupedu.gabrielpedrico.DeletaChavePixRequest
 import com.zupedu.gabrielpedrico.DeletaPixGrpcServiceGrpc
 import com.zupedu.gabrielpedrico.TipoDeConta
+import com.zupedu.gabrielpedrico.dtos.BcbDeletaChavePixRequest
 import com.zupedu.gabrielpedrico.enums.TipoDeChave
 import com.zupedu.gabrielpedrico.integrations.*
 import com.zupedu.gabrielpedrico.models.ChavePix
@@ -30,11 +31,17 @@ import javax.inject.Singleton
 internal class DeletaChaveEndPointTest(
     val repository: ChavePixRepository,
     val grpcClient: DeletaPixGrpcServiceGrpc.DeletaPixGrpcServiceBlockingStub,
-    @Inject val itauClient: ContasDeClientesNoItauClient
+    @Inject val itauClient: ContasDeClientesNoItauClient,
+    @Inject val bcbClient:BcbClient
 ) {
     @MockBean(ContasDeClientesNoItauClient::class)
     fun itauClient(): ContasDeClientesNoItauClient? {
         return Mockito.mock(ContasDeClientesNoItauClient::class.java)
+    }
+
+    @MockBean(BcbClient::class)
+    fun bcbClient(): BcbClient? {
+        return Mockito.mock(BcbClient::class.java)
     }
 
     @Factory
@@ -81,6 +88,11 @@ internal class DeletaChaveEndPointTest(
             )
         )
             .thenReturn(HttpResponse.ok(dadosDoClienteResponse()))
+
+        Mockito.`when`(
+            bcbClient.deletaConta("34939607860", BcbDeletaChavePixRequest("34939607860"))
+        )
+            .thenReturn(HttpResponse.ok())
 
         val response = grpcClient.deleta(
             DeletaChavePixRequest.newBuilder()

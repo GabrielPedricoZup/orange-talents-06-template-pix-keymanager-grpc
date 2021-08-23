@@ -5,6 +5,7 @@ import com.zupedu.gabrielpedrico.DeletaChavePixRequest
 import com.zupedu.gabrielpedrico.DeletaChavePixResponse
 import com.zupedu.gabrielpedrico.DeletaPixGrpcServiceGrpc
 import com.zupedu.gabrielpedrico.dtos.BcbDeletaChavePixRequest
+import com.zupedu.gabrielpedrico.handlers.BcbErroException
 import com.zupedu.gabrielpedrico.handlers.ChavePixNaoExistenteException
 import com.zupedu.gabrielpedrico.handlers.ChavePixNaoPertenceUsuarioException
 import com.zupedu.gabrielpedrico.integrations.BcbClient
@@ -34,7 +35,8 @@ class DeletaChaveEndPoint(
         val response = itauClient.buscaConta(deletaChave?.clienteId.toString())
         val conta = response.body() ?: throw IllegalStateException("Cliente não encontrado no Itau")
         val chavePix = repository.findById(UUID.fromString(deletaChave?.chavePix)).get()
-        bcbClient.deletaConta(chavePix.chave, BcbDeletaChavePixRequest(chavePix.chave.toString()))
+        val status = bcbClient.deletaConta(chavePix.chave, BcbDeletaChavePixRequest(chavePix?.chave.toString()))
+        if(status.code() != 200) throw BcbErroException("Falha na comunicação com ERP do BCB")
         repository.deleteById(UUID.fromString(deletaChave?.chavePix))
 
         responseObserver?.onNext(

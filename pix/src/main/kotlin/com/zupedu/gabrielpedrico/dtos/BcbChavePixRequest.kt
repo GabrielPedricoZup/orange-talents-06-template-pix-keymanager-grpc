@@ -1,6 +1,5 @@
 package com.zupedu.gabrielpedrico.dtos
 
-import com.zupedu.gabrielpedrico.TipoDeConta
 import com.zupedu.gabrielpedrico.enums.TipoDeChave
 
 data class BcbChavePixRequest(var keyType: TipoDeChave?,

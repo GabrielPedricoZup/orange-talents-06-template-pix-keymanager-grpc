@@ -37,3 +37,10 @@ fun notFound(message: String?): com.google.rpc.Status =
         .setCode(Code.NOT_FOUND.number)
         .setMessage(message)
         .build()
+
+fun bcbInternError(message: String?): com.google.rpc.Status =
+    com.google.rpc.Status.newBuilder()
+        .setCode(Code.UNAVAILABLE.number)
+        .setMessage(message)
+        .build()
+
