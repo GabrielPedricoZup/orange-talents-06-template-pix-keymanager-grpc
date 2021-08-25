@@ -40,7 +40,7 @@ class NovaChavePixService(@Inject val repository: ChavePixRepository,
         if(novaChave.tipoDeConta.name == "CONTA_POUPANCA")  tipoDeChave = "SVGS"
         var bankAccount = BankAccount("60701190",conta.agencia.toString(),conta.numeroDaConta.toString(),tipoDeChave.toString())
         var owner: Owner = Owner("NATURAL_PERSON",conta.nomeDoTitular.toString(),conta.cpfDoTitular.toString())
-        val request: BcbChavePixRequest = BcbChavePixRequest(novaChave.tipo,novaChave.chave,bankAccount,owner)
+        val request = BcbChavePixRequest(novaChave.tipo,novaChave.chave,bankAccount,owner)
         bcbClient.registraConta(request)
         //4. grava no banco de dados
         val chave = novaChave.paraChavePix(conta)
