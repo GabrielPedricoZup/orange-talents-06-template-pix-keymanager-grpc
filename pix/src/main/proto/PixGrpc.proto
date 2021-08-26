@@ -21,6 +21,10 @@ service ConsultaPixGrpcService {
   rpc consulta (ConsultaChavePixRequest) returns (ConsultaChavePixResponse) {}
 }
 
+service ListaChavesGrpcService{
+  rpc listaChaves(ListarChavesRequest) returns (ListarChavesResponse){}
+}
+
 message PixRequest {
   string name = 1;
 }
@@ -105,3 +109,24 @@ message Owner{
   string name = 2;
   string taxIdNumber = 3;
 }
+
+/*Lista todas as chaves pix*/
+
+message ListarChavesRequest{
+  string clientId = 1;
+}
+
+message ListarChavesResponse{
+
+  message ChavePix{
+    string pixId = 1;
+    string clientId = 2;
+    string tipoDeChave = 3;
+    string valorDaChave = 4;
+    google.protobuf.Timestamp createdAt = 5;
+  }
+
+  repeated ChavePix chavePix = 1;
+}
+
+
