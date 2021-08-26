@@ -3,7 +3,7 @@ package com.zupedu.gabrielpedrico.endpoints.deleta
 import com.zupedu.gabrielpedrico.DeletaChavePixRequest
 import com.zupedu.gabrielpedrico.DeletaPixGrpcServiceGrpc
 import com.zupedu.gabrielpedrico.TipoDeConta
-import com.zupedu.gabrielpedrico.dtos.BcbDeletaChavePixRequest
+import com.zupedu.gabrielpedrico.dtos.deleta.BcbDeletaChavePixRequest
 import com.zupedu.gabrielpedrico.enums.TipoDeChave
 import com.zupedu.gabrielpedrico.integrations.*
 import com.zupedu.gabrielpedrico.models.ChavePix

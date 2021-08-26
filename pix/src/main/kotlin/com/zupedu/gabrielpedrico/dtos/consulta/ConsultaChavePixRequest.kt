@@ -1,10 +1,12 @@
-package com.zupedu.gabrielpedrico.endpoints.consulta
+package com.zupedu.gabrielpedrico.dtos.consulta
 
 import com.zupedu.gabrielpedrico.ConsultaChavePixRequest
+import com.zupedu.gabrielpedrico.dtos.consulta.ConsultaChavePix
+import com.zupedu.gabrielpedrico.dtos.consulta.ConsultaChavePixAlt
 import javax.validation.ConstraintViolationException
 import javax.validation.Validator
 
-fun ConsultaChavePixRequest.paraConsultaChavePixRequest(validador: Validator): ConsultaChavePix{
+fun ConsultaChavePixRequest.paraConsultaChavePixRequest(validador: Validator): ConsultaChavePix {
 
    val consultaChavePix = ConsultaChavePix(clientId = pixId.clientId,
                         pixId = pixId.pixId)
@@ -18,7 +20,7 @@ fun ConsultaChavePixRequest.paraConsultaChavePixRequest(validador: Validator): C
 
 }
 //Para o fluxo alternativo
-fun ConsultaChavePixRequest.paraConsultaChavePixRequestAlt(validador: Validator): ConsultaChavePixAlt{
+fun ConsultaChavePixRequest.paraConsultaChavePixRequestAlt(validador: Validator): ConsultaChavePixAlt {
 
     val consultaChavePixAlt = ConsultaChavePixAlt(chavePix = chavePix)
 

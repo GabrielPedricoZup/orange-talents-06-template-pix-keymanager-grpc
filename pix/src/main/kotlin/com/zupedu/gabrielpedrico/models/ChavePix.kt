@@ -1,7 +1,7 @@
 package com.zupedu.gabrielpedrico.models
 
 import com.zupedu.gabrielpedrico.TipoDeConta
-import com.zupedu.gabrielpedrico.dtos.ContaAssociada
+import com.zupedu.gabrielpedrico.dtos.registra.ContaAssociada
 import com.zupedu.gabrielpedrico.enums.TipoDeChave
 import org.hibernate.annotations.GenericGenerator
 import java.time.LocalDateTime

@@ -3,6 +3,7 @@ package com.zupedu.gabrielpedrico.endpoints.registra
 import com.zupedu.gabrielpedrico.RegistraChavePixRequest
 import com.zupedu.gabrielpedrico.RegistraChavePixResponse
 import com.zupedu.gabrielpedrico.RegistraPixGrpcServiceGrpc
+import com.zupedu.gabrielpedrico.dtos.registra.paraNovaChavePix
 import io.grpc.stub.StreamObserver
 import javax.inject.Inject
 import javax.inject.Singleton

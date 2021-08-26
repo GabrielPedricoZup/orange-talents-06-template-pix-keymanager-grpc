@@ -1,7 +1,7 @@
-package com.zupedu.gabrielpedrico.endpoints.deleta
+package com.zupedu.gabrielpedrico.dtos.deleta
 
 import com.zupedu.gabrielpedrico.DeletaChavePixRequest
-import com.zupedu.gabrielpedrico.dtos.DeletaChavePix
+import com.zupedu.gabrielpedrico.dtos.deleta.DeletaChavePix
 import javax.validation.ConstraintViolationException
 import javax.validation.Validator
 

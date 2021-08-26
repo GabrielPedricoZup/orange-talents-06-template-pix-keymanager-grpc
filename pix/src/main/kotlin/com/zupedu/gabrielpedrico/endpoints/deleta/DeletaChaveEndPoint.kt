@@ -1,10 +1,10 @@
 package com.zupedu.gabrielpedrico.endpoints.deleta
 
-import com.google.protobuf.DescriptorProtos
 import com.zupedu.gabrielpedrico.DeletaChavePixRequest
 import com.zupedu.gabrielpedrico.DeletaChavePixResponse
 import com.zupedu.gabrielpedrico.DeletaPixGrpcServiceGrpc
-import com.zupedu.gabrielpedrico.dtos.BcbDeletaChavePixRequest
+import com.zupedu.gabrielpedrico.dtos.deleta.BcbDeletaChavePixRequest
+import com.zupedu.gabrielpedrico.dtos.deleta.paraDeletaChavePix
 import com.zupedu.gabrielpedrico.handlers.BcbErroException
 import com.zupedu.gabrielpedrico.handlers.ChavePixNaoExistenteException
 import com.zupedu.gabrielpedrico.handlers.ChavePixNaoPertenceUsuarioException

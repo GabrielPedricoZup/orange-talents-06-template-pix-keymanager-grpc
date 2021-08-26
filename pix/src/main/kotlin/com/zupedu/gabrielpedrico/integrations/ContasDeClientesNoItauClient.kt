@@ -1,6 +1,6 @@
 package com.zupedu.gabrielpedrico.integrations
 
-import com.zupedu.gabrielpedrico.dtos.ContaAssociada
+import com.zupedu.gabrielpedrico.dtos.registra.ContaAssociada
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.PathVariable

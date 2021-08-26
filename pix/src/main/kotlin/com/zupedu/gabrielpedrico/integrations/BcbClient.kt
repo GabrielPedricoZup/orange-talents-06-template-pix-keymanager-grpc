@@ -1,8 +1,8 @@
 package com.zupedu.gabrielpedrico.integrations
 
-import com.zupedu.gabrielpedrico.dtos.BcbChavePixRequest
-import com.zupedu.gabrielpedrico.dtos.BcbDeletaChavePixRequest
-import com.zupedu.gabrielpedrico.endpoints.consulta.ConsultaChavePixBcbResponse
+import com.zupedu.gabrielpedrico.dtos.consulta.ConsultaChavePixBcbResponse
+import com.zupedu.gabrielpedrico.dtos.deleta.BcbDeletaChavePixRequest
+import com.zupedu.gabrielpedrico.dtos.registra.BcbChavePixRequest
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.*
@@ -17,7 +17,7 @@ interface BcbClient {
 
     @Delete("/api/v1/pix/keys/{key}")
     @Produces(MediaType.APPLICATION_XML)
-    fun deletaConta(@PathVariable key:String?,@Body request:BcbDeletaChavePixRequest): HttpResponse<Any?>
+    fun deletaConta(@PathVariable key:String?,@Body request: BcbDeletaChavePixRequest): HttpResponse<Any?>
 
     @Get("/api/v1/pix/keys/{key}")
     @Produces(MediaType.APPLICATION_XML)

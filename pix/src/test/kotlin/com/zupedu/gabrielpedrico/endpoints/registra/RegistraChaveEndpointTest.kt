@@ -4,9 +4,9 @@ import com.zupedu.gabrielpedrico.RegistraChavePixRequest
 import com.zupedu.gabrielpedrico.RegistraPixGrpcServiceGrpc
 import com.zupedu.gabrielpedrico.TipoDeChave
 import com.zupedu.gabrielpedrico.TipoDeConta
-import com.zupedu.gabrielpedrico.dtos.BankAccount
-import com.zupedu.gabrielpedrico.dtos.BcbChavePixRequest
-import com.zupedu.gabrielpedrico.dtos.Owner
+import com.zupedu.gabrielpedrico.dtos.registra.BankAccount
+import com.zupedu.gabrielpedrico.dtos.registra.BcbChavePixRequest
+import com.zupedu.gabrielpedrico.dtos.registra.Owner
 import com.zupedu.gabrielpedrico.integrations.*
 import com.zupedu.gabrielpedrico.models.ChavePix
 import com.zupedu.gabrielpedrico.repositories.ChavePixRepository

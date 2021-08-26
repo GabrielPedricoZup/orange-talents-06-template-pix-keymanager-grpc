@@ -1,4 +1,4 @@
-package com.zupedu.gabrielpedrico.endpoints.consulta
+package com.zupedu.gabrielpedrico.dtos.consulta
 
 import io.micronaut.core.annotation.Introspected
 import javax.validation.constraints.NotBlank

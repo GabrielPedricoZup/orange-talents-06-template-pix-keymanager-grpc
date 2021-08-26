@@ -1,7 +1,8 @@
-package com.zupedu.gabrielpedrico.dtos
+package com.zupedu.gabrielpedrico.dtos.registra
 
 
 import com.zupedu.gabrielpedrico.TipoDeConta
+import com.zupedu.gabrielpedrico.dtos.registra.ContaAssociada
 import com.zupedu.gabrielpedrico.models.ChavePix
 import com.zupedu.gabrielpedrico.validations.ValidPixKey
 import com.zupedu.gabrielpedrico.validations.ValidUUID

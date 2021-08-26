@@ -1,9 +1,9 @@
-package com.zupedu.gabrielpedrico.endpoints.registra
+package com.zupedu.gabrielpedrico.dtos.registra
 
 import com.zupedu.gabrielpedrico.RegistraChavePixRequest
 import com.zupedu.gabrielpedrico.TipoDeChave
 import com.zupedu.gabrielpedrico.TipoDeConta
-import com.zupedu.gabrielpedrico.dtos.NovaChavePix
+import com.zupedu.gabrielpedrico.dtos.registra.NovaChavePix
 import java.lang.IllegalArgumentException
 
 fun RegistraChavePixRequest.paraNovaChavePix () : NovaChavePix {

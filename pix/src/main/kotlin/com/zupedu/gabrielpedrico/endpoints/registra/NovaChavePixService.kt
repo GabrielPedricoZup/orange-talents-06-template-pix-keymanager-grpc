@@ -1,10 +1,9 @@
 package com.zupedu.gabrielpedrico.endpoints.registra
 
-import com.zupedu.gabrielpedrico.TipoDeConta
-import com.zupedu.gabrielpedrico.dtos.BankAccount
-import com.zupedu.gabrielpedrico.dtos.BcbChavePixRequest
-import com.zupedu.gabrielpedrico.dtos.NovaChavePix
-import com.zupedu.gabrielpedrico.dtos.Owner
+import com.zupedu.gabrielpedrico.dtos.registra.BankAccount
+import com.zupedu.gabrielpedrico.dtos.registra.BcbChavePixRequest
+import com.zupedu.gabrielpedrico.dtos.registra.NovaChavePix
+import com.zupedu.gabrielpedrico.dtos.registra.Owner
 import com.zupedu.gabrielpedrico.handlers.ChavePixExistenteException
 import com.zupedu.gabrielpedrico.integrations.BcbClient
 import com.zupedu.gabrielpedrico.integrations.ContasDeClientesNoItauClient

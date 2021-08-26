@@ -1,6 +1,6 @@
 package com.zupedu.gabrielpedrico.validations
 
-import com.zupedu.gabrielpedrico.dtos.NovaChavePix
+import com.zupedu.gabrielpedrico.dtos.registra.NovaChavePix
 import io.micronaut.core.annotation.AnnotationValue
 import io.micronaut.validation.validator.constraints.*
 import javax.inject.Singleton

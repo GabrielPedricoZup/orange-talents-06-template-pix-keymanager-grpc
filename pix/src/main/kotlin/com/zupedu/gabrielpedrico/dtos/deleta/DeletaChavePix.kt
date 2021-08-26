@@ -1,4 +1,4 @@
-package com.zupedu.gabrielpedrico.dtos
+package com.zupedu.gabrielpedrico.dtos.deleta
 
 import com.zupedu.gabrielpedrico.validations.ValidUUID
 import io.micronaut.core.annotation.Introspected

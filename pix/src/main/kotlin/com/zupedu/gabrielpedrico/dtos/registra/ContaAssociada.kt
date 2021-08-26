@@ -1,4 +1,4 @@
-package com.zupedu.gabrielpedrico.dtos
+package com.zupedu.gabrielpedrico.dtos.registra
 
 import javax.persistence.Embeddable
 

@@ -2,8 +2,9 @@ package com.zupedu.gabrielpedrico.endpoints.consulta
 
 import com.google.protobuf.Timestamp
 import com.zupedu.gabrielpedrico.*
-import com.zupedu.gabrielpedrico.BankAccount
-import com.zupedu.gabrielpedrico.Owner
+import com.zupedu.gabrielpedrico.dtos.consulta.ConsultaChavePixBcbResponse
+import com.zupedu.gabrielpedrico.dtos.consulta.paraConsultaChavePixRequest
+import com.zupedu.gabrielpedrico.dtos.consulta.paraConsultaChavePixRequestAlt
 import com.zupedu.gabrielpedrico.handlers.ChavePixNaoExistenteException
 import com.zupedu.gabrielpedrico.handlers.ChavePixNaoPertenceUsuarioException
 import com.zupedu.gabrielpedrico.integrations.BcbClient
