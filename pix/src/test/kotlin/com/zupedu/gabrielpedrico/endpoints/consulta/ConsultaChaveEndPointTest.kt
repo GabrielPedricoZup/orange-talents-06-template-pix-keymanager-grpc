@@ -68,7 +68,7 @@ internal class ConsultaChaveEndPointTest(
 
 
     @Factory
-    class Clients {
+    class ConsultaClients {
         @Singleton
         fun blockingStub(@GrpcChannel(GrpcServerChannel.NAME) channel: ManagedChannel): ConsultaPixGrpcServiceGrpc.ConsultaPixGrpcServiceBlockingStub {
             return ConsultaPixGrpcServiceGrpc.newBlockingStub(channel)

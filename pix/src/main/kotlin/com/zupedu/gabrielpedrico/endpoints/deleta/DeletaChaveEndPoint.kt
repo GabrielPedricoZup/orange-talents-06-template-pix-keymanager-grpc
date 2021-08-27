@@ -20,10 +20,10 @@ import javax.validation.Validator
 
 @Singleton
 class DeletaChaveEndPoint(
-    @Inject val repository: ChavePixRepository,
-    @Inject val itauClient: ContasDeClientesNoItauClient,
-    @Inject val validator: Validator,
-    @Inject val bcbClient: BcbClient
+    private val repository: ChavePixRepository,
+    private val itauClient: ContasDeClientesNoItauClient,
+    private val validator: Validator,
+    private val bcbClient: BcbClient
 ) : DeletaPixGrpcServiceGrpc.DeletaPixGrpcServiceImplBase() {
 
     override fun deleta(request: DeletaChavePixRequest?,

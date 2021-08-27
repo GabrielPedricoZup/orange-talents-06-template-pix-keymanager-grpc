@@ -19,9 +19,9 @@ import javax.validation.Validator
 
 @Singleton
 class ConsultaChaveEndPoint(
-    @Inject val validator: Validator,
-    @Inject val bcbClient: BcbClient,
-    @Inject val repository: ChavePixRepository,
+    private val validator: Validator,
+    private val bcbClient: BcbClient,
+    private val repository: ChavePixRepository,
 ) : ConsultaPixGrpcServiceGrpc.ConsultaPixGrpcServiceImplBase() {
 
     private lateinit var possivelResponse: ConsultaChavePixBcbResponse

@@ -9,7 +9,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class RegistraChaveEndpoint(@Inject private val service: NovaChavePixService) :
+class RegistraChaveEndpoint(private val service: NovaChavePixService) :
     RegistraPixGrpcServiceGrpc.RegistraPixGrpcServiceImplBase() {
 
     override fun registra(

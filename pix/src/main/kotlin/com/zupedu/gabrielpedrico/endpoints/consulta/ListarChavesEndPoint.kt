@@ -17,9 +17,9 @@ import javax.validation.Validator
 
 @Singleton
 class ListarChavesEndPoint(
-    @Inject val repository: ChavePixRepository,
-    @Inject val validator: Validator,
-    @Inject val itauClient: ContasDeClientesNoItauClient
+    private val repository: ChavePixRepository,
+    private val validator: Validator,
+    private val itauClient: ContasDeClientesNoItauClient
 ) : ListaChavesGrpcServiceGrpc.ListaChavesGrpcServiceImplBase() {
 
 
